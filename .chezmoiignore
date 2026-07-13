@@ -1,0 +1,14 @@
+# Cache and build artifacts
+**/.DS_Store
+**/node_modules
+**/*.log
+
+# History and local state
+.zsh_history
+.bash_history
+.sh_history
+.viminfo
+
+# Secrets and credentials
+.ssh/**
+.gnupg/**
