@@ -24,10 +24,10 @@ chezmoi apply                  # apply source to home directory
 
 ## What's included
 
-- Shell: zsh, fish completions, starship
+- Shell: zsh, starship
 - Terminal: Ghostty
 - Editor: Neovim (LazyVim)
-- Tools: tmux, git, gh, fastfetch, btop, cava, opencode, vicinae
+- Tools: tmux, git, gh, fastfetch, cava, opencode, vicinae
 - Scripts: `~/.config/scripts`
 
 ## What's excluded

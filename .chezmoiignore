@@ -15,3 +15,9 @@ README.md
 # Secrets and credentials
 .ssh/**
 .gnupg/**
+
+# Installer-managed or runtime files
+.config/fish/**
+.config/scripts/obsidian-weekly-review/state.json
+.config/scripts/obsidian-weekly-review/logs/**
+**/*.bak
