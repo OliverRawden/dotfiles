@@ -18,6 +18,12 @@ README.md
 
 # Installer-managed or runtime files
 .config/fish/**
+
+# Zed: prompt library DB and other machine-local state
+.config/zed/prompts/**
+.config/zed/themes/**
+
+# Script runtime state (generated locally)
 .config/scripts/obsidian-weekly-review/state.json
 .config/scripts/obsidian-weekly-review/logs/**
 **/*.bak
