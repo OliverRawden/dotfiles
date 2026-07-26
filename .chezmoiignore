@@ -1,29 +1,14 @@
-# Repo docs only (don't deploy to ~)
+# Repo-only files (do not apply into $HOME)
 README.md
+.gitignore
 
-# Cache and build artifacts
+# Junk / secrets / runtime
 **/.DS_Store
-**/node_modules
-**/*.log
-
-# History and local state
-.zsh_history
-.bash_history
-.sh_history
-.viminfo
-
-# Secrets and credentials
-.ssh/**
-.gnupg/**
-
-# Installer-managed or runtime files
-.config/fish/**
-
-# Zed: prompt library DB and other machine-local state
-.config/zed/prompts/**
-.config/zed/themes/**
-
-# Script runtime state (generated locally)
-.config/scripts/obsidian-weekly-review/state.json
-.config/scripts/obsidian-weekly-review/logs/**
 **/*.bak
+**/node_modules
+**/package-lock.json
+**/bun.lock
+**/bun.lockb
+**/logs
+**/state.json
+**/.git
