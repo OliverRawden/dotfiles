@@ -1,30 +1,30 @@
 # Dotfiles
 
-Managed with [chezmoi](https://www.chezmoi.io/).
+This repo **is** `~/.config`. No chezmoi — just git.
 
 ## Setup on a new machine
 
 ```bash
-# Install chezmoi (macOS)
-brew install chezmoi
-
-# Init and apply (replace USER with your GitHub username)
-chezmoi init --apply OliverRawden
-# or explicitly:
-# chezmoi init --apply https://github.com/OliverRawden/dotfiles.git
+# If ~/.config already exists, move it aside first
+git clone https://github.com/OliverRawden/dotfiles.git ~/.config
 ```
 
-## Common commands
+Point zsh at this directory from `~/.zshenv`:
 
 ```bash
-chezmoi status          # see drift between source and home
-chezmoi diff            # preview changes
-chezmoi apply           # apply source → home
-chezmoi add ~/.zshrc    # track a new file
-chezmoi update          # pull + apply
+. "$HOME/.cargo/env"
+export ZDOTDIR="$HOME/.config/zsh"
 ```
 
-## Notes
+Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/`) and is not in this repo.
 
-- Secrets are **not** tracked (e.g. `~/.config/gh/hosts.yml`, SSH keys, API tokens).
-- Re-authenticate tools after clone (`gh auth login`, etc.).
+## Day to day
+
+```bash
+cd ~/.config
+git add -A && git commit -m "Update configs" && git push
+```
+
+## Not tracked
+
+Secrets and machine state stay local: `rclone.conf`, `gh/hosts.yml`, Wireshark keys, `node_modules`, Raycast extensions, shell history dumps.

@@ -1,2 +1,32 @@
+# Secrets — never commit
+rclone/rclone.conf
+gh/hosts.yml
+wireshark/80211_keys
+
+# Chezmoi leftovers (no longer used)
+chezmoi/
+
+# Vendor / caches / generated
 .DS_Store
+**/.DS_Store
 *.bak
+*.log
+**/node_modules/
+raycast/
+opencode/node_modules/
+opencode/bun.lock
+opencode/package-lock.json
+zed/prompts/
+uv/
+cagent/
+cliamp/resume.json
+
+# Shell runtime
+zsh/.zcompdump
+zsh/.zsh_sessions/
+fish/fish_variables
+
+# App state, not config
+qBittorrent/
+wireshark/recent
+wireshark/recent_common
