@@ -128,17 +128,13 @@ link_path() {
 }
 
 apply_symlinks() {
-  [ -d "$DOTFILES" ] || die "missing $DOTFILES"
-  # Link every regular file in the repo except .git and the bootstrap files.
-  while IFS= read -r -d '' src; do
-    local rel="${src#"$DOTFILES"/}"
-    case "$rel" in
-      .git|/*|.git/*) continue ;;
-    esac
-    [[ "$rel" == .git/* ]] && continue
+  [ -d "$DOTFILES/.git" ] || die "missing $DOTFILES/.git"
+  # Only link files git tracks — skips README/install and anything gitignored.
+  while IFS= read -r -d '' rel; do
+    [ -n "$rel" ] || continue
     skip_rel "$rel" && continue
     link_path "$rel"
-  done < <(find "$DOTFILES" -path "$DOTFILES/.git" -prune -o -type f -print0)
+  done < <(git -C "$DOTFILES" ls-files -z)
 }
 
 main() {
