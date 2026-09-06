@@ -1,30 +1,72 @@
 # Dotfiles
 
-This repo **is** `~/.config`. No chezmoi — just git.
+Plain git. No chezmoi.
 
-## Setup on a new machine
+Clone lives at `~/.local/share/dotfiles`. Tracked files sit under `home/`
+mirroring `$HOME`, and `install.sh` symlinks them into place.
 
-```bash
-# If ~/.config already exists, move it aside first
-git clone https://github.com/OliverRawden/dotfiles.git ~/.config
-```
-
-Point zsh at this directory from `~/.zshenv`:
+## Install
 
 ```bash
-. "$HOME/.cargo/env"
-export ZDOTDIR="$HOME/.config/zsh"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/OliverRawden/dotfiles/main/install.sh)"
 ```
 
-Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/`) and is not in this repo.
+The repo is **private**, so that curl needs a token (or use `gh`):
+
+```bash
+# already authed with gh:
+gh repo clone OliverRawden/dotfiles ~/.local/share/dotfiles
+~/.local/share/dotfiles/install.sh
+```
+
+Safe to re-run. By default it won't clobber existing regular files; pass
+`--force` to back them up (`*.bak.<timestamp>`) and replace with symlinks.
+
+Default clone path: `~/.local/share/dotfiles`.
+
+## Layout
+
+```
+install.sh          # bootstrap (also at ~/.config/scripts/install-dotfiles.sh)
+home/
+  .zshenv
+  .zshrc            # tiny PATH stub; real zsh lives under .config/zsh (ZDOTDIR)
+  .config/
+    zsh/            # .zshrc, .zprofile
+    fish/
+    git/
+    tmux/
+    nvim/
+    opencode/
+    zed/
+    gh/config.yml   # not hosts.yml
+    scripts/
+    cava/, fastfetch/, cliamp/, starship.toml, ...
+  Library/Application Support/com.mitchellh.ghostty/config.ghostty
+```
 
 ## Day to day
 
 ```bash
-cd ~/.config
+cd ~/.local/share/dotfiles
+# edit files under home/ ...
 git add -A && git commit -m "Update configs" && git push
+# re-link if you added new paths:
+./install.sh
 ```
 
-## Not tracked
+## Stays out of the repo
 
-Secrets and machine state stay local: `rclone.conf`, `gh/hosts.yml`, Wireshark keys, `node_modules`, Raycast extensions, shell history dumps.
+Secrets and machine state — do not commit these:
+
+- `rclone.conf`
+- `gh/hosts.yml`
+- SSH keys (`~/.ssh`)
+- tokens, API keys, anything that isn't plain config
+- `node_modules`, lockfile junk, shell history, app caches
+
+## macOS notes
+
+Written for Apple Silicon + Homebrew. Ghostty config is under
+`~/Library/Application Support/...` (not XDG). `~/.zshenv` sets
+`ZDOTDIR=$HOME/.config/zsh`.

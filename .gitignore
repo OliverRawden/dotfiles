@@ -1,30 +1,38 @@
 # Secrets — never commit
-rclone/rclone.conf
-gh/hosts.yml
-wireshark/80211_keys
+**/rclone.conf
+**/hosts.yml
+**/*_keys
+**/*.pem
+**/id_rsa
+**/id_ed25519
+**/id_ecdsa
 
-# Chezmoi leftovers (no longer used)
+# Chezmoi leftovers (retired)
+.chezmoiignore
+.chezmoiroot
 chezmoi/
 
 # Vendor / caches / generated
 .DS_Store
 **/.DS_Store
 *.bak
+*.bak.*
 *.log
 **/node_modules/
+**/bun.lock
+**/bun.lockb
+**/package-lock.json
 raycast/
-opencode/node_modules/
-opencode/bun.lock
-opencode/package-lock.json
 zed/prompts/
 uv/
 cagent/
 cliamp/resume.json
 
 # Shell runtime
-zsh/.zcompdump
-zsh/.zsh_sessions/
+**/.zcompdump
+**/.zsh_sessions/
 fish/fish_variables
+**/fish_variables
 
 # App state, not config
 qBittorrent/

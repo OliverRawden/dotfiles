@@ -1,0 +1,214 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "agent": {
+    "default_model": {
+      "provider": "ollama",
+      "model": "dolphin-mistral:7b",
+      "enable_thinking": false
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "grok-build": {
+      "type": "registry"
+    }
+  },
+  "ui_font_family": "SF Pro",
+  "buffer_font_family": "Hack Nerd Font",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false
+  },
+  "session": {
+    "trust_all_worktrees": true
+  },
+  "vim_mode": true,
+  "base_keymap": "JetBrains",
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark"
+  },
+
+  // --- Java / Maven / Gradle -------------------------------------------------
+  // Extension: Java (already installed). Docs: https://zed.dev/docs/languages/java
+  // Open the folder that contains pom.xml or build.gradle(.kts) as the project root.
+  "languages": {
+    "Java": {
+      "language_servers": ["jdtls"],
+      "formatter": "language_server",
+      "tab_size": 4,
+      "preferred_line_length": 120,
+      "format_on_save": "on",
+      "show_completions_on_input": true
+    },
+    "Gradle": {
+      "tab_size": 4
+    },
+    "Gradle KTS": {
+      "tab_size": 4
+    },
+    "XML": {
+      "tab_size": 2
+    }
+  },
+
+  "lsp": {
+    "jdtls": {
+      "settings": {
+        // JDK used to *run* JDTLS (needs 21+). Project language level is separate.
+        "java_home": "/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home",
+        "lombok_support": true,
+        "jdk_auto_download": false,
+        "min_memory": "1G",
+        "max_memory": "4G",
+        "check_updates": "always"
+      },
+      "initialization_options": {
+        "settings": {
+          "java": {
+            "home": "/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home",
+            "autobuild": {
+              "enabled": true
+            },
+            "eclipse": {
+              "downloadSources": true
+            },
+            "maven": {
+              "downloadSources": true,
+              "updateSnapshots": false
+            },
+            "configuration": {
+              "updateBuildConfiguration": "automatic",
+              "maven": {
+                // Used when you have private/internal Maven repos
+                "userSettings": "~/.m2/settings.xml"
+              },
+              "runtimes": [
+                {
+                  "name": "JavaSE-25",
+                  "path": "/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home",
+                  "default": true
+                },
+                {
+                  "name": "JavaSE-26",
+                  "path": "/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+                }
+              ]
+            },
+            "import": {
+              "maven": {
+                "enabled": true
+              },
+              "gradle": {
+                "enabled": true,
+                "wrapper": {
+                  "enabled": true
+                },
+                // JVM for the Gradle daemon (17+ required for modern Gradle)
+                "java": {
+                  "home": "/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home"
+                },
+                "annotationProcessing": {
+                  "enabled": true
+                }
+              },
+              "exclusions": [
+                "**/node_modules/**",
+                "**/.metadata/**",
+                "**/archetype-resources/**",
+                "**/META-INF/maven/**",
+                "**/.git/**",
+                "**/build/**",
+                "**/target/**",
+                "**/.gradle/**"
+              ]
+            },
+            "saveActions": {
+              "organizeImports": true
+            },
+            "signatureHelp": {
+              "enabled": true,
+              "description": {
+                "enabled": true
+              }
+            },
+            "completion": {
+              "enabled": true,
+              "favoriteStaticMembers": [
+                "org.junit.Assert.*",
+                "org.junit.Assume.*",
+                "org.junit.jupiter.api.Assertions.*",
+                "org.junit.jupiter.api.Assumptions.*",
+                "org.junit.jupiter.api.DynamicContainer.*",
+                "org.junit.jupiter.api.DynamicTest.*",
+                "org.mockito.Mockito.*",
+                "org.mockito.ArgumentMatchers.*",
+                "org.assertj.core.api.Assertions.*"
+              ],
+              "importOrder": [
+                "java",
+                "javax",
+                "jakarta",
+                "org",
+                "com"
+              ],
+              "guessMethodArguments": "insertParameterNames",
+              "postfix": {
+                "enabled": true
+              }
+            },
+            "format": {
+              "enabled": true,
+              "onType": {
+                "enabled": true
+              }
+            },
+            "references": {
+              "includeAccessors": true,
+              "includeDecompiledSources": true
+            },
+            "referencesCodeLens": {
+              "enabled": true
+            },
+            "implementationCodeLens": "all",
+            "inlayHints": {
+              "parameterNames": {
+                "enabled": "literals"
+              }
+            },
+            "errors": {
+              "incompleteClasspath": {
+                "severity": "warning"
+              }
+            },
+            "sources": {
+              "organizeImports": {
+                "starThreshold": 99,
+                "staticStarThreshold": 99
+              }
+            }
+          }
+        }
+      }
+    },
+    "gradle-language-server": {
+      "settings": {
+        "java_home": "/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home",
+        "gradleWrapperEnabled": true,
+        "check_updates": "always"
+      }
+    }
+  }
+}

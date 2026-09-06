@@ -1,0 +1,57 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "ollama/devstral-small-2-uncensored",
+  "small_model": "ollama/huihui_ai/qwen3-abliterated:8b-v2",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1",
+        "apiKey": "ollama"
+      },
+      "models": {
+        "devstral-small-2-uncensored": {
+          "name": "Devstral Small 2 24B Uncensored (local)",
+          "tools": true,
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "qwen2.5:14b": {
+          "name": "Qwen 2.5 14B (local)",
+          "tools": true,
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "huihui_ai/qwen3-abliterated:8b-v2": {
+          "name": "Qwen3 8B Abliterated (local)",
+          "tools": true,
+          "limit": {
+            "context": 40960,
+            "output": 8192
+          }
+        },
+        "GFalcon-UA/dolphin3-r1-mistral:latest": {
+          "name": "Dolphin 3 R1 Mistral 24B (local)",
+          "tools": false,
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        },
+        "dolphin-mistral:latest": {
+          "name": "Dolphin Mistral 7B (local)",
+          "tools": false,
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        }
+      }
+    }
+  }
+}

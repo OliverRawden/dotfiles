@@ -1,0 +1,7 @@
+[user]
+	email = o.rawden@proton.me
+	name = OliverRawden
+[init]
+	defaultBranch = main
+[core]
+	excludesFile = ~/.config/git/ignore

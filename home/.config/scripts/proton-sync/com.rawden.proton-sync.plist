@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.rawden.proton-sync</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/rawden/.config/scripts/proton-sync.sh</string>
+    <string>backup</string>
+    <string>--scheduled</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>HOME</key>
+    <string>/Users/rawden</string>
+    <key>PATH</key>
+    <string>/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+  </dict>
+  <key>WorkingDirectory</key>
+  <string>/Users/rawden</string>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>3</integer>
+    <key>Minute</key>
+    <integer>30</integer>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/rawden/Library/Logs/proton-sync.launchd.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/rawden/Library/Logs/proton-sync.launchd.log</string>
+  <key>Nice</key>
+  <integer>15</integer>
+  <key>LowPriorityIO</key>
+  <true/>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>RunAtLoad</key>
+  <false/>
+</dict>
+</plist>
