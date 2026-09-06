@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
-# Bootstrap OliverRawden/dotfiles — plain git, no chezmoi.
+# My dotfiles bootstrap. Plain git, nothing fancy.
 #
-# One-liner (new machine):
+# New machine:
 #   sh -c "$(curl -fsSL https://raw.githubusercontent.com/OliverRawden/dotfiles/main/install.sh)"
 #
-# Note: the GitHub repo is private. curl needs auth, e.g.:
-#   sh -c "$(curl -fsSL -H "Authorization: token $GITHUB_TOKEN" \
-#     https://raw.githubusercontent.com/OliverRawden/dotfiles/main/install.sh)"
-# Or clone with gh/git first, then run ./install.sh from the clone.
+# If the repo is private, curl needs a token, or just:
+#   gh repo clone OliverRawden/dotfiles ~/.local/share/dotfiles
+#   ~/.local/share/dotfiles/install.sh
 #
-# Idempotent: safe to re-run. Does not print secrets.
-#
-# Approach: clone/pull into ~/.local/share/dotfiles, then symlink each
-# tracked path from home/ into $HOME (symlink farm). Existing regular
-# files are left alone unless --force is passed.
+# Safe to run more than once. Won't overwrite normal files unless you pass --force.
 
 set -euo pipefail
 
@@ -28,13 +23,11 @@ die() { printf 'error: %s\n' "$*" >&2; exit 1; }
 is_macos() { [ "$(uname -s)" = "Darwin" ]; }
 
 usage() {
-  cat <<'EOF'
+  cat <<'USAGE'
 Usage: install.sh [--force]
 
-  --force   Replace existing non-symlink files at destination paths
-            (backups go to path.bak.<timestamp>). Symlinks are always
-            updated to point at the repo.
-EOF
+  --force   Replace existing non-symlink files (backs them up as *.bak.<timestamp>)
+USAGE
 }
 
 for arg in "$@"; do
@@ -46,9 +39,7 @@ for arg in "$@"; do
 done
 
 ensure_brew_in_path() {
-  if command -v brew >/dev/null 2>&1; then
-    return 0
-  fi
+  command -v brew >/dev/null 2>&1 && return 0
   if [ -x /opt/homebrew/bin/brew ]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
   elif [ -x /usr/local/bin/brew ]; then
@@ -57,18 +48,14 @@ ensure_brew_in_path() {
 }
 
 install_homebrew() {
-  if command -v brew >/dev/null 2>&1; then
-    return 0
-  fi
+  command -v brew >/dev/null 2>&1 && return 0
   ensure_brew_in_path
-  if command -v brew >/dev/null 2>&1; then
-    return 0
-  fi
+  command -v brew >/dev/null 2>&1 && return 0
   is_macos || return 0
-  log "Installing Homebrew (NONINTERACTIVE)..."
+  log "Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   ensure_brew_in_path
-  command -v brew >/dev/null 2>&1 || die "Homebrew installed but brew not found on PATH"
+  command -v brew >/dev/null 2>&1 || die "Homebrew installed but brew isn't on PATH"
 }
 
 repo_is_ours() {
@@ -85,11 +72,11 @@ repo_is_ours() {
 ensure_clone() {
   if repo_is_ours "$DOTFILES"; then
     log "Updating $DOTFILES ..."
-    git -C "$DOTFILES" pull --ff-only || log "warning: git pull failed (offline?); using existing clone"
+    git -C "$DOTFILES" pull --ff-only || log "warning: pull failed; using what's already there"
     return 0
   fi
   if [ -e "$DOTFILES" ]; then
-    die "$DOTFILES exists but is not this repo — move it aside and re-run"
+    die "$DOTFILES exists but isn't this repo — move it aside and re-run"
   fi
   mkdir -p "$(dirname "$DOTFILES")"
   log "Cloning $REPO_SLUG → $DOTFILES ..."
@@ -98,17 +85,23 @@ ensure_clone() {
   else
     git clone "$REPO_URL" "$DOTFILES"
   fi
-  repo_is_ours "$DOTFILES" || die "clone did not look like $REPO_SLUG"
+  repo_is_ours "$DOTFILES" || die "clone didn't look like $REPO_SLUG"
 }
 
-# Symlink $DOTFILES/home/<rel> → $HOME/<rel>
+# Files that live in the repo but shouldn't be linked into $HOME
+skip_rel() {
+  case "$1" in
+    README.md|install.sh|.gitignore|.gitattributes) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
 link_path() {
   local rel="$1"
-  local src="$DOTFILES/home/$rel"
+  local src="$DOTFILES/$rel"
   local dst="$HOME/$rel"
 
   [ -e "$src" ] || [ -L "$src" ] || die "missing source: $src"
-
   mkdir -p "$(dirname "$dst")"
 
   if [ -L "$dst" ]; then
@@ -122,10 +115,10 @@ link_path() {
   elif [ -e "$dst" ]; then
     if [ "$FORCE" -eq 1 ]; then
       local bak="$dst.bak.$(date +%Y%m%d%H%M%S)"
-      log "backup existing ~/$rel → $bak"
+      log "backup ~/$rel → $bak"
       mv "$dst" "$bak"
     else
-      log "skip (exists, not a symlink): ~/$rel  (pass --force to replace)"
+      log "skip (exists): ~/$rel  (use --force to replace)"
       return 0
     fi
   fi
@@ -135,16 +128,17 @@ link_path() {
 }
 
 apply_symlinks() {
-  local home_root="$DOTFILES/home"
-  [ -d "$home_root" ] || die "missing $home_root — is the repo layout wrong?"
-
-  # Every regular file under home/ becomes a symlink in $HOME
-  # (directories are created as needed; we link files, not dir roots,
-  # so unmanaged siblings in e.g. ~/.config stay put).
+  [ -d "$DOTFILES" ] || die "missing $DOTFILES"
+  # Link every regular file in the repo except .git and the bootstrap files.
   while IFS= read -r -d '' src; do
-    local rel="${src#"$home_root"/}"
+    local rel="${src#"$DOTFILES"/}"
+    case "$rel" in
+      .git|/*|.git/*) continue ;;
+    esac
+    [[ "$rel" == .git/* ]] && continue
+    skip_rel "$rel" && continue
     link_path "$rel"
-  done < <(find "$home_root" -type f -print0)
+  done < <(find "$DOTFILES" -path "$DOTFILES/.git" -prune -o -type f -print0)
 }
 
 main() {
@@ -158,8 +152,8 @@ main() {
   ensure_clone
   apply_symlinks
 
-  log "Done. Dotfiles linked from $DOTFILES (plain git, no chezmoi)."
-  log "Re-run with --force to replace existing non-symlink files."
+  log "Done. Linked from $DOTFILES"
+  log "Re-run with --force if you want existing files replaced."
 }
 
 main "$@"
