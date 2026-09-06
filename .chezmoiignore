@@ -1,5 +1,6 @@
 # Repo-only files (do not apply into $HOME)
 README.md
+install.sh
 .gitignore
 
 # Junk / secrets / runtime
