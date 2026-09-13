@@ -1,0 +1,17 @@
+/Users/rawden/Desktop
+/Users/rawden/Documents
+/Users/rawden/Downloads
+/Users/rawden/Pictures
+/Users/rawden/Music
+/Users/rawden/Movies
+/Users/rawden/Public
+/Users/rawden/Obsidian
+/Users/rawden/Developer
+/Users/rawden/Games
+/Users/rawden/Applications
+/Users/rawden/.ssh
+/Users/rawden/.config
+/Users/rawden/Library/Application Support/MobileSync
+/Users/rawden/Library/Preferences
+/Users/rawden/Library/Fonts
+/Users/rawden/Library/Safari

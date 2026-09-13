@@ -1,0 +1,51 @@
+# macOS junk
+.DS_Store
+.localized
+**/.DS_Store
+**/.localized
+**/*.sock
+**/*.tmp
+**/._*
+
+# Caches and build artifacts inside included trees
+**/.Trash
+**/.cache
+**/Caches
+**/Cache
+**/cache
+**/Code Cache
+**/GPUCache
+**/ShaderCache
+**/__pycache__
+**/*.pyc
+**/.venv
+**/venv
+**/node_modules
+**/.npm
+**/.pnpm-store
+**/.gradle
+**/.m2/repository
+**/target
+**/.build
+**/DerivedData
+**/.swiftpm
+**/.dart_tool
+**/.pub-cache
+**/.rustup
+**/.cargo/registry
+**/.cargo/git
+
+# Already in the cloud; do not copy back into Proton Drive
+**/CloudStorage
+**/Mobile Documents
+
+# Steam / VMs / disk images
+**/Steam
+**/*.vmdk
+**/*.vdi
+**/*.qcow2
+**/*.ova
+**/*.sparseimage
+**/*.dmg
+**/Virtual Machines.localized
+**/.lima

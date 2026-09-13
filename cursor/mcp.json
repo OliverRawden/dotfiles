@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "mac-fs": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/rawden/.config",
+        "/Users/rawden/.local",
+        "/Users/rawden/.cursor"
+      ]
+    }
+  }
+}
