@@ -1,6 +1,6 @@
 # Dotfiles
 
-This repo **is** `~/.config`. No chezmoi — just git.
+This repo is just a backup of `~/.config`.
 
 ## Setup on a new machine
 
@@ -17,16 +17,5 @@ Point zsh at this directory from `~/.zshenv`:
 export ZDOTDIR="$HOME/.config/zsh"
 ```
 
-Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/`) and is not in this repo.
+Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/`) and is not in this repo yet.
 
-## Day to day
-
-```bash
-cd ~/.config
-git add -A && git commit -m "Update configs" && git push
-```
-
-## Not tracked
-
-Secrets and machine state stay local: `rclone.conf`, `gh/hosts.yml`, Wireshark keys, `node_modules`, Raycast extensions, shell history dumps.
-# dotfiles
