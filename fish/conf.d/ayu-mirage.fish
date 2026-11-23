@@ -1,5 +1,5 @@
 # Ayu Mirage — matches ~/.config/starship.toml palettes.ayu_mirage
-# and the syntax highlighting you'd see in the zsh + Ghostty setup.
+# and the Ghostty palette.
 
 set -g fish_color_normal         BFBDB6
 set -g fish_color_command        59C2FF

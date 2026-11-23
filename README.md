@@ -1,23 +1,25 @@
 # Dotfiles
 
-This repo **is** `~/.config`. No chezmoi — just git.
+This directory is `~/.config`. It is a normal git repo. Each app has its own folder.
 
 ## Setup on a new machine
 
 ```bash
-# If ~/.config already exists, move it aside first
-git clone git@github.com:OliverRawden/config.git ~/.config
-# or: git clone https://github.com/OliverRawden/config.git ~/.config
+git clone https://github.com/OliverRawden/dotfiles.git ~/.config
 ```
 
-Point zsh at this directory from `~/.zshenv`:
+`~/.zshenv` has to live in `$HOME`, because zsh reads it before `ZDOTDIR` is set. It is a symlink to `~/.config/zsh/.zshenv`, which points zsh at `~/.config/zsh`.
 
-```bash
-. "$HOME/.cargo/env"
-export ZDOTDIR="$HOME/.config/zsh"
-```
+## Layout
 
-Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/`) and is not in this repo.
+One directory per app: `fish/`, `zsh/`, `nvim/`, `ghostty/`, `git/`, `tmux/`, and the rest. Shell colours live next to the shell that uses them:
+
+- `fish/conf.d/ayu-mirage.fish`
+- `zsh/ayu-mirage.zsh`
+
+Secrets and machine state stay untracked. See `.gitignore`.
+
+Old home-manager copies are in `~/.local/share/dotfile-archive/`, not in this repo.
 
 ## Day to day
 
@@ -25,8 +27,3 @@ Ghostty lives outside XDG (`~/Library/Application Support/com.mitchellh.ghostty/
 cd ~/.config
 git add -A && git commit -m "Update configs" && git push
 ```
-
-## Not tracked
-
-Secrets and machine state stay local: `rclone.conf`, `gh/hosts.yml`, Wireshark keys, `node_modules`, Raycast extensions, shell history dumps.
-# dotfiles

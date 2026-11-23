@@ -30,3 +30,9 @@ fish/fish_variables
 qBittorrent/
 wireshark/recent
 wireshark/recent_common
+
+# Added 23/11/2026: secrets, backups and caches found untracked
+opencode/service.json
+opencode/*.backup
+zsh/.zcompcache/
+flutter/

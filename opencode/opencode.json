@@ -53,5 +53,20 @@
         }
       }
     }
+  },
+  "mcp": {
+    "rea": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "rea-agents@6.7.0",
+        "mcp"
+      ],
+      "enabled": true,
+      "environment": {
+        "HOPPER_LAUNCHER_PATH": "/Users/rawden/Applications/Hopper Disassembler.app/Contents/MacOS/hopper"
+      }
+    }
   }
 }

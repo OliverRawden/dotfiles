@@ -1,5 +1,7 @@
 // Zed settings
 //
+// Java home is the Oracle JDK 25 bundle.
+//
 // For information on how to configure Zed, see the Zed
 // documentation: https://zed.dev/docs/configuring-zed
 //
@@ -17,6 +19,9 @@
     "model_parameters": []
   },
   "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    },
     "grok-build": {
       "type": "registry"
     }

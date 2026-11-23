@@ -21,6 +21,8 @@
     "memory",
     "disk",
     "battery",
-    "terminal"
+    "terminal",
+    "separator",
+    "colors"
   ]
 }

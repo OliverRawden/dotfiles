@@ -1,0 +1,45 @@
+
+# -----------------
+#  Apearance
+# -----------------
+
+# Color Scheme (Ayu Dark)
+palette = 1=#FF3333
+palette = 2=#C2D94C
+palette = 3=#FFB454
+palette = 4=#59C2FF
+palette = 5=#D2A6FF
+palette = 6=#95E6CB
+palette = 7=#B3B1AD
+palette = 8=#3D424D
+palette = 9=#FF6666
+palette = 10=#D8EC63
+palette = 11=#FFD173
+palette = 12=#73CCFF
+palette = 13=#E0B8FF
+palette = 14=#B5F0DE
+palette = 15=#F8F8F2
+foreground = #B3B1AD
+cursor-color = #FFB454
+selection-foreground = #F8F8F2
+
+background = #06090D
+cursor-text = #06090D
+palette = 0=#000306
+selection-background = #1A3346
+
+# Font
+font-family = "Hack Nerd Font Mono"
+font-size = 13 
+
+# Cursor 
+cursor-style = bar 
+cursor-style-blink = true 
+cursor-click-to-move = true
+mouse-hide-while-typing = true
+
+# Window
+background-opacity = 0.8
+background-blur = macos-glass-regular
+unfocused-split-opacity = 0.45
+

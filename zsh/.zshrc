@@ -1,26 +1,22 @@
-
 # -----------------------------
 # User scripts + XDG local bin
 # -----------------------------
-# Athena: user scripts + XDG local bin
-export PATH="$HOME/.config/scripts:$HOME/.local/bin:$PATH"
+export PATH="$HOME/.scripts:$HOME/.local/bin:$PATH"
 
-# -----------------------------
-# PATH / Homebrew (Apple Silicon)
-# -----------------------------
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-# -----------------------------
-# ZSH Completion
-# -----------------------------
+# Completions before the single compinit. Dump stays in the cache, not this directory.
+fpath=(~/.grok/completions/zsh $fpath)
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
 autoload -Uz compinit
-compinit
+compinit -C -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
 
-# Zsh Autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Accept suggestion with Right Arrow
-bindkey '^[[C' autosuggest-accept
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  bindkey '^[[C' autosuggest-accept
+fi
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
@@ -38,23 +34,29 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 
 # -----------------------------
-# FZF
+# FZF / Zoxide
 # -----------------------------
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh)
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd='z'
+fi
 
 # -----------------------------
-# Zoxide (smart cd)
+# ls: eza when it is installed, BSD ls otherwise
 # -----------------------------
-eval "$(zoxide init zsh)"
-
-alias cd='z'
-
-# -----------------------------
-# Eza 
-# -----------------------------
-alias ls='eza --group-directories-first --icons always'
-alias ll='eza -lh --group-directories-first --icons always --git'
-alias la='eza -lha --group-directories-first --icons always --git'
+if command -v eza >/dev/null 2>&1; then
+  alias ls='eza --group-directories-first --icons always'
+  alias ll='eza -lh --group-directories-first --icons always --git'
+  alias la='eza -lha --group-directories-first --icons always --git'
+else
+  alias ls='command ls -G'
+  alias ll='command ls -lhG'
+  alias la='command ls -lahG'
+fi
 
 # -----------------------------
 # Git & Github
@@ -64,51 +66,41 @@ alias ga='git add --all'
 alias gp='git push origin main'
 alias gc='git commit -m'
 
-# -----------------------------
-# Neovim
-# -----------------------------
-alias vi="nvim"
-alias vim="nvim"
-
-# -----------------------------
-# Zed Code Editor
-# -----------------------------
-alias zz="zed"
-
-
-# -----------------------------
-# Starship Prompt
-# -----------------------------
-eval "$(starship init zsh)"
-
-# -----------------------------
-# Fastfetch on Startup
-# -----------------------------
-if command -v fastfetch >/dev/null 2>&1; then
-    fastfetch
+# Editors: Neovim, then vim. zz only when Zed is installed.
+if command -v nvim >/dev/null 2>&1; then
+  alias vi='nvim'
+  alias vim='nvim'
+elif command -v vim >/dev/null 2>&1; then
+  alias vi='vim'
+fi
+if command -v zed >/dev/null 2>&1; then
+  alias zz='zed'
 fi
 
-# opencode
-export PATH=/Users/rawden/.opencode/bin:$PATH
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
+if command -v fastfetch >/dev/null 2>&1; then
+  fastfetch
+fi
 
-
-# >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
+export PATH="$HOME/.opencode/bin:$HOME/.grok/bin:$PATH"
 
 # -----------------------------
-# Java — Homebrew OpenJDK 21 (default for shell tools)
+# Java — Oracle JDK 25 when nothing else has set JAVA_HOME.
 # -----------------------------
-export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
-export PATH="$JAVA_HOME/bin:$PATH"
+if [ -z "${JAVA_HOME:-}" ] && [ -d /Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home ]; then
+  export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-25.jdk/Contents/Home"
+fi
+[ -n "${JAVA_HOME:-}" ] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # -----------------------------
 # XQuartz — Linux apps in lima display here
 # -----------------------------
-export PATH="/opt/X11/bin:$PATH"
+if [ -d /opt/X11/bin ]; then
+  export PATH="/opt/X11/bin:$PATH"
+fi
 if [ -z "${DISPLAY:-}" ] && [ -S /tmp/.X11-unix/X0 ]; then
   export DISPLAY=:0
 fi
@@ -133,15 +125,5 @@ lima-x11() {
 }
 
 
-# Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="/Users/rawden/Library/Application Support/Herd/config/php/84"
-
-
-# Herd injected NVM configuration
-export NVM_DIR="/Users/rawden/Library/Application Support/Herd/config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
-
-# Herd injected PHP binary.
-export PATH="/Users/rawden/Library/Application Support/Herd/bin":$PATH
+# Command-line colours. Must stay last: the highlighter wraps the line editor.
+[ -f "$ZDOTDIR/ayu-mirage.zsh" ] && source "$ZDOTDIR/ayu-mirage.zsh"

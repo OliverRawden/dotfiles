@@ -1,4 +1,4 @@
-# Configuration file for Wireshark 4.6.5.
+# Configuration file for Wireshark 4.6.9.
 #
 # This file is regenerated each time preferences are saved within
 # Wireshark. Making manual changes should be safe, however.
@@ -400,7 +400,7 @@ capture.device: Wi-Fi: en0
 
 # Interface link-layer header types (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_linktypes: ap1(1),en0(1),awdl0(1),llw0(1),utun0(0),utun1(0),utun2(0),utun3(0),utun4(0),utun5(0),utun8(12),lo0(0),anpi3(1),anpi0(1),anpi1(1),en4(1),en5(1),en6(1),en1(1),en2(1),en3(1),bridge0(1),gif0(0),stf0(0),nan0(1),ciscodump(147),randpkt(147),sshdump(147),udpdump(252),wifidump(147)
+capture.devices_linktypes: en0(127),awdl0(1),llw0(1),utun0(0),utun1(0),utun2(0),utun3(0),utun4(0),utun5(0),utun6(12),utun7(12),utun8(12),utun9(12),lo0(0),anpi3(1),anpi0(1),anpi1(1),en4(1),en5(1),en6(1),en1(1),en2(1),en3(1),bridge0(1),gif0(0),stf0(0),ap1(1),nan0(1),ciscodump(147),randpkt(147),sshdump(147),udpdump(252),wifidump(147)
 
 # Interface descriptions (Ex: eth0(eth0 descr),eth1(eth1 descr),...)
 # A string
@@ -416,15 +416,15 @@ capture.devices_monitor_mode: en0
 
 # Interface buffer size (Ex: en0(1),en1(143),...)
 # A string
-capture.devices_buffersize: ap1(2),en0(2),awdl0(2),llw0(2),utun0(2),utun1(2),utun2(2),utun3(2),utun4(2),utun5(2),utun8(2),lo0(2),anpi3(2),anpi0(2),anpi1(2),en4(2),en5(2),en6(2),en1(2),en2(2),en3(2),bridge0(2),gif0(2),stf0(2),nan0(2),ciscodump(2),randpkt(2),sshdump(2),udpdump(2),wifidump(2)
+capture.devices_buffersize: en0(2),awdl0(2),llw0(2),utun0(2),utun1(2),utun2(2),utun3(2),utun4(2),utun5(2),utun6(2),utun7(2),utun8(2),utun9(2),lo0(2),anpi3(2),anpi0(2),anpi1(2),en4(2),en5(2),en6(2),en1(2),en2(2),en3(2),bridge0(2),gif0(2),stf0(2),ap1(2),nan0(2),ciscodump(2),randpkt(2),sshdump(2),udpdump(2),wifidump(2)
 
 # Interface snap length (Ex: en0(65535),en1(1430),...)
 # A string
-capture.devices_snaplen: ap1:0(262144),en0:0(262144),awdl0:0(262144),llw0:0(262144),utun0:0(262144),utun1:0(262144),utun2:0(262144),utun3:0(262144),utun4:0(262144),utun5:0(262144),utun8:0(262144),lo0:0(262144),anpi3:0(262144),anpi0:0(262144),anpi1:0(262144),en4:0(262144),en5:0(262144),en6:0(262144),en1:0(262144),en2:0(262144),en3:0(262144),bridge0:0(262144),gif0:0(262144),stf0:0(262144),nan0:0(262144),ciscodump:0(262144),randpkt:0(262144),sshdump:0(262144),udpdump:0(262144),wifidump:0(262144)
+capture.devices_snaplen: en0:0(262144),awdl0:0(262144),llw0:0(262144),utun0:0(262144),utun1:0(262144),utun2:0(262144),utun3:0(262144),utun4:0(262144),utun5:0(262144),utun6:0(262144),utun7:0(262144),utun8:0(262144),utun9:0(262144),lo0:0(262144),anpi3:0(262144),anpi0:0(262144),anpi1:0(262144),en4:0(262144),en5:0(262144),en6:0(262144),en1:0(262144),en2:0(262144),en3:0(262144),bridge0:0(262144),gif0:0(262144),stf0:0(262144),ap1:0(262144),nan0:0(262144),ciscodump:0(262144),randpkt:0(262144),sshdump:0(262144),udpdump:0(262144),wifidump:0(262144)
 
 # Interface promiscuous mode (Ex: en0(0),en1(1),...)
 # A string
-capture.devices_pmode: ap1(1),en0(1),awdl0(1),llw0(1),utun0(1),utun1(1),utun2(1),utun3(1),utun4(1),utun5(1),utun8(1),lo0(1),anpi3(1),anpi0(1),anpi1(1),en4(1),en5(1),en6(1),en1(1),en2(1),en3(1),bridge0(1),gif0(1),stf0(1),nan0(1),ciscodump(1),randpkt(1),sshdump(1),udpdump(1),wifidump(1)
+capture.devices_pmode: en0(1),awdl0(1),llw0(1),utun0(1),utun1(1),utun2(1),utun3(1),utun4(1),utun5(1),utun6(1),utun7(1),utun8(1),utun9(1),lo0(1),anpi3(1),anpi0(1),anpi1(1),en4(1),en5(1),en6(1),en1(1),en2(1),en3(1),bridge0(1),gif0(1),stf0(1),ap1(1),nan0(1),ciscodump(1),randpkt(1),sshdump(1),udpdump(1),wifidump(1)
 
 # Capture in promiscuous mode?
 # true or false (case-insensitive)
@@ -606,7 +606,7 @@ capture.monitor_mode: TRUE
 
 # Remote capture filter
 # A string
-#extcap.ciscodump.remotefilter: deny tcp host 10.2.0.2 any eq 22, deny tcp any eq 22 host 10.2.0.2, deny tcp host fe80::f7b8:81da:12fb:6af1 any eq 22, deny tcp any eq 22 host fe80::f7b8:81da:12fb:6af1, deny tcp host fe80::dc93:16ff:fead:556c any eq 22, deny tcp any eq 22 host fe80::dc93:16ff:fead:556c, deny tcp host fe80::9976:a483:10d:d7c6 any eq 22, deny tcp any eq 22 host fe80::9976:a483:10d:d7c6, deny tcp host fe80::ce81:b1c:bd2c:69e any eq 22, deny tcp any eq 22 host fe80::ce81:b1c:bd2c:69e, deny tcp host fe80::fe5:3cdf:cefe:b601 any eq 22, deny tcp any eq 22 host fe80::fe5:3cdf:cefe:b601, deny tcp host fe80::1617:425:611f:91e5 any eq 22, deny tcp any eq 22 host fe80::1617:425:611f:91e5, deny tcp host fe80::45e7:95c6:f58a:578a any eq 22, deny tcp any eq 22 host fe80::45e7:95c6:f58a:578a, deny tcp host fe80::94ff:5dff:fe61:b535 any eq 22, deny tcp any eq 22 host fe80::94ff:5dff:fe61:b535, deny tcp host fe80::94ff:5dff:fe61:b535 any eq 22, deny tcp any eq 22 host fe80::94ff:5dff:fe61:b535, deny tcp host 2a00:23cc:e508:6501:fd54:d060:51a7:ff6c any eq 22, deny tcp any eq 22 host 2a00:23cc:e508:6501:fd54:d060:51a7:ff6c, deny tcp host 2a00:23cc:e508:6501:c58:e4e2:39df:3d27 any eq 22, deny tcp any eq 22 host 2a00:23cc:e508:6501:c58:e4e2:39df:3d27, deny tcp host 192.168.1.76 any eq 22, deny tcp any eq 22 host 192.168.1.76, deny tcp host fe80::fa:1639:5d34:d840 any eq 22, deny tcp any eq 22 host fe80::fa:1639:5d34:d840, deny tcp host fe80::1 any eq 22, deny tcp any eq 22 host fe80::1, permit ip any any
+#extcap.ciscodump.remotefilter: deny tcp host 10.2.0.2 any eq 22, deny tcp any eq 22 host 10.2.0.2, deny tcp host fe80::fb5f:f7c6:5632:f189 any eq 22, deny tcp any eq 22 host fe80::fb5f:f7c6:5632:f189, deny tcp host fe80::3c85:bd31:86de:6fd6 any eq 22, deny tcp any eq 22 host fe80::3c85:bd31:86de:6fd6, deny tcp host fe80::4f0:d659:3ddf:5c82 any eq 22, deny tcp any eq 22 host fe80::4f0:d659:3ddf:5c82, deny tcp host fe80::dc63:ceff:fe0e:c7eb any eq 22, deny tcp any eq 22 host fe80::dc63:ceff:fe0e:c7eb, deny tcp host fe80::ce81:b1c:bd2c:69e any eq 22, deny tcp any eq 22 host fe80::ce81:b1c:bd2c:69e, deny tcp host fe80::9779:fc39:2661:cc20 any eq 22, deny tcp any eq 22 host fe80::9779:fc39:2661:cc20, deny tcp host fe80::6517:4597:7f71:46ef any eq 22, deny tcp any eq 22 host fe80::6517:4597:7f71:46ef, deny tcp host fe80::a420:29ff:fef0:3e06 any eq 22, deny tcp any eq 22 host fe80::a420:29ff:fef0:3e06, deny tcp host fe80::a420:29ff:fef0:3e06 any eq 22, deny tcp any eq 22 host fe80::a420:29ff:fef0:3e06, deny tcp host fe80::1 any eq 22, deny tcp any eq 22 host fe80::1, permit ip any any
 
 # Packets to capture
 # A string
@@ -694,7 +694,7 @@ capture.monitor_mode: TRUE
 
 # Remote capture filter
 # A string
-#extcap.sshdump.remotefilter: not ((host 10.2.0.2 or host fe80::f7b8:81da:12fb:6af1 or host fe80::dc93:16ff:fead:556c or host fe80::9976:a483:10d:d7c6 or host fe80::ce81:b1c:bd2c:69e or host fe80::fe5:3cdf:cefe:b601 or host fe80::1617:425:611f:91e5 or host fe80::45e7:95c6:f58a:578a or host fe80::94ff:5dff:fe61:b535 or host fe80::94ff:5dff:fe61:b535 or host 2a00:23cc:e508:6501:fd54:d060:51a7:ff6c or host 2a00:23cc:e508:6501:c58:e4e2:39df:3d27 or host 192.168.1.76 or host fe80::fa:1639:5d34:d840 or host fe80::1) and port 22)
+#extcap.sshdump.remotefilter: not ((host 10.2.0.2 or host fe80::fb5f:f7c6:5632:f189 or host fe80::3c85:bd31:86de:6fd6 or host fe80::4f0:d659:3ddf:5c82 or host fe80::dc63:ceff:fe0e:c7eb or host fe80::ce81:b1c:bd2c:69e or host fe80::9779:fc39:2661:cc20 or host fe80::6517:4597:7f71:46ef or host fe80::a420:29ff:fef0:3e06 or host fe80::a420:29ff:fef0:3e06 or host fe80::1) and port 22)
 
 # Packets to capture
 # A string
